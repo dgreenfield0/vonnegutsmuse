@@ -18,14 +18,28 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      /* Font size set to 25vh to make it 25% of the viewport height */
       font-size: 25vh;
-      font-family: 'Caveat', cursive;
+      /* Add fallback font to maintain consistent sizing during load */
+      font-family: 'Caveat', Arial, sans-serif;
       min-height: 100vh;
       max-width: 100vw;
       text-align: center;
+      /* Prevent Flash of Unstyled Content */
+      opacity: 0;
+      transition: opacity 0.1s ease-in;
+    }
+
+    /* Show content once fonts are loaded */
+    .fonts-loaded {
+      opacity: 1;
     }
   </style>
+  <script>
+    // Wait for the font to load before showing content
+    document.fonts.ready.then(() => {
+      document.body.classList.add('fonts-loaded');
+    });
+  </script>
 </head>
 <body>
   *
